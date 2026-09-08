@@ -14,8 +14,9 @@
      window.OX1_WSTORE = { centralUrl, wsRef, wsStoreId }
    el gate consulta la RPC publica store_status del panel CENTRAL y
    bloquea la tienda al instante si la central dice online=false
-   (no registrada, suspendida o vencida). Si el panel no tiene esa
-   tienda registrada aún, la página queda bloqueada (más seguro).
+   (suspendida o vencida) SOLO si la tienda está registrada. Sin
+   registrar (status 'unregistered') la tienda funciona igual: el
+   bloqueo remoto empieza desde que se registra en el panel.
    ============================================================= */
 (function () {
   'use strict';
@@ -93,6 +94,11 @@
         if (j && j.online === true) {
           locked = false;
           if (j.tier && j.tier !== 'free') badge(j.tier);
+          resolve(true);
+        } else if (j && j.status === 'unregistered') {
+          // Sin registrar en el panel central: la tienda funciona igual.
+          // El bloqueo remoto solo aplica desde que se registra en el panel.
+          locked = false;
           resolve(true);
         } else {
           var reason = (j && j.reason) || 'La tienda no está registrada o fue suspendida.';

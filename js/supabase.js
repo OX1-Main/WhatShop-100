@@ -21,12 +21,15 @@ function loadSupabase() {
 // ===== Tienda activa (multi-tienda) =====
 // Cada repo/tierenda puede fijar su id con `const WS_STORE_ID = N`
 // en config.js. Si no, se respeta la elección guardada en localStorage
-// y, si nada hay, se usa la tienda 1.
+// La tienda horneada (WS_STORE_ID del config.js de ESTE repo) manda.
+// Solo si no hay baked se usa el localStorage (p. ej. para switchear
+// entre tiendas en instalaciones multi-tienda) y, si nada hay, la 1.
 function getActiveStoreId() {
+  const baked = Number(window.WS_STORE_ID || 0);
+  if (Number.isInteger(baked) && baked > 0) return baked;
   const v = Number(localStorage.getItem('whatshop_store'));
   if (Number.isInteger(v) && v > 0) return v;
-  const baked = Number(window.WS_STORE_ID || 0);
-  return Number.isInteger(baked) && baked > 0 ? baked : 1;
+  return 1;
 }
 function setActiveStoreId(id) {
   localStorage.setItem('whatshop_store', String(id));
