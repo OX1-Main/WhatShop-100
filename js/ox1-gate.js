@@ -60,23 +60,6 @@
     }
   }
 
-  function badge(plan) {
-    if (!plan) return;
-    var tl = { free: 'Freemium', basico: 'B\u00e1sico', profesional: 'Profesional', empresarial: 'Empresarial' };
-    var el = document.getElementById('ox1-plan-badge');
-    if (!el) {
-      el = document.createElement('span');
-      el.id = 'ox1-plan-badge';
-      el.style.cssText = 'display:inline-flex;align-items:center;gap:6px;padding:4px 12px;margin-right:8px;border-radius:999px;background:rgba(22,163,74,.14);border:1px solid rgba(22,163,74,.4);color:#16a34a;font-weight:700;font-size:12px;letter-spacing:.3px;white-space:nowrap';
-      el.innerHTML = '<svg viewBox="0 0 24 24" width="13" height="13" fill="#16a34a" aria-hidden="true"><path d="M12 2 4 5v6c0 5.2 3.4 9.7 8 11 4.6-1.3 8-5.8 8-11V5Z"/><path d="m9 12 2 2 4-4" stroke="#fff" stroke-width="1.6" fill="none"/></svg><span></span>';
-      var host = document.querySelector('.header-actions') || document.body;
-      host.insertBefore(el, host.firstChild);
-    }
-    var t = tl[plan] || { onetime: 'Pago \u00fanico', monthly: 'Mensual', yearly: 'Anual' }[plan] || String(plan || '').toUpperCase();
-    el.querySelector('span').textContent = 'Plan ' + t;
-    el.style.display = 'inline-flex';
-  }
-
   /* ---- Modo tienda: consulta store_status en la central ---- */
   var checkTimer = null;
   function checkStore() {
@@ -92,7 +75,6 @@
       }).then(function (r) { return r.json(); }).then(function (j) {
         if (j && j.online === true) {
           locked = false;
-          if (j.tier && j.tier !== 'free') badge(j.tier);
           resolve(true);
         } else {
           var reason = (j && j.reason) || 'La tienda no está registrada o fue suspendida.';
@@ -129,8 +111,7 @@
             graceHours: cfg.graceHours || 72,
             debug: !!cfg.debug,
             onLock: showLock,
-            onState: function (state, data) {
-              if (state === 'ok' && data && data.plan) badge(data.plan);
+            onState: function () {
             }
           });
           OX1License.check().catch(function () {});
