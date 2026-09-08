@@ -87,7 +87,7 @@
       }
       fetch(wstore.centralUrl + '/rest/v1/rpc/store_status', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'apikey': wstore.centralKey || '', 'Authorization': 'Bearer ' + (wstore.centralKey || '') , 'Content-Type': 'application/json' },
         body: JSON.stringify({ p_ws_ref: wstore.wsRef, p_ws_store_id: wstore.wsStoreId })
       }).then(function (r) { return r.json(); }).then(function (j) {
         if (j && j.online === true) {
