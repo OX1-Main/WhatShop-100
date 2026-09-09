@@ -84,5 +84,5 @@ window.OX1_WSTORE = {
    Opcional. Si lo defines, las imagenes publicas se sirven desde tu
    Worker de Cloudflare (que cachea y reenvia a Supabase una sola vez),
    ahorrando egress/banda de Supabase. Deja null para servir directo.
-   Ejemplo: 'https://img-mitienda.workers.dev' (sin barra final). */
-window.IMG_CDN = null;
+Ejemplo: 'https://img-mitienda.workers.dev' (sin barra final). */
+window.IMG_CDN = 'https://shiny-scene-c37d.contactservice-ox1.workers.dev';
