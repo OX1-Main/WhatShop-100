@@ -21,9 +21,10 @@
         <span><span class="what">What</span><span class="shop">Shop</span></span>
       </div>
       <p class="sub" data-i18n="login_sub">Panel de administración</p>
-      <input id="pin" type="password" inputmode="numeric" placeholder="PIN" autocomplete="current-password" />
+      <input id="login-user" type="text" autocomplete="username" placeholder="Usuario" />
+      <input id="login-pass" type="password" autocomplete="current-password" placeholder="Contraseña" />
       <button class="login-btn" id="login-btn" data-i18n="login_btn">Entrar</button>
-      <p class="login-error" id="login-error" data-i18n="login_error">PIN incorrecto</p>
+      <p class="login-error" id="login-error" data-i18n="login_error">Credenciales incorrectas o acceso denegado</p>
       <p class="login-hint" id="login-hint"></p>
     </div>
   </div>
@@ -702,15 +703,9 @@
           <!-- ===== Configuración ===== -->
           <section class="pane hidden" data-mode="avanzado" id="tab-config">
             <h1 data-i18n="t_config">Configuración</h1>
-            <p class="page-sub" data-i18n="t_config_sub">PIN de acceso, pantalla de bienvenida y ajustes del panel.</p>
-            <div class="panel"><h3 data-i18n="cf_pin">PIN de administrador</h3>
-              <p class="page-sub" style="margin-bottom:10px" data-i18n="cf_pin_sub">PIN numérico de 6 dígitos. Cambiará el acceso al panel.</p>
-              <div class="grid-2">
-                <div class="field"><label data-i18n="cf_pin_new">Nuevo PIN (6 dígitos)</label><input type="password" id="cfg-pin-new" maxlength="6" inputmode="numeric" /></div>
-                <div class="field"><label data-i18n="cf_pin_confirm">Confirmar PIN</label><input type="password" id="cfg-pin-confirm" maxlength="6" inputmode="numeric" /></div>
-              </div>
-              <button class="btn green" id="btn-change-pin" data-i18n="cf_pin_btn">Cambiar PIN</button>
-              <p class="status-line" id="pin-status"></p>
+            <p class="page-sub" data-i18n="t_config_sub">Acceso al panel, pantalla de bienvenida y ajustes.</p>
+            <div class="panel"><h3 data-i18n="cf_login">Acceso del administrador</h3>
+              <p class="page-sub" style="margin-bottom:0" data-i18n="cf_login_sub">Tu usuario y contraseña se gestionan en el panel central (los servicios de tu proveedor). Si la tienda está bloqueada o no registrada, el acceso se deniega automáticamente.</p>
             </div>
             <div class="panel"><h3 data-i18n="cf_splash">Pantalla de bienvenida</h3>
               <p class="page-sub" style="margin-bottom:10px" data-i18n="cf_splash_sub">Se muestra tras el splash de 3s, antes de entrar a la tienda.</p>
@@ -840,7 +835,7 @@
     // ===== i18n =====
     var I18N = {
       es: {
-        login_sub: 'Panel de administración', login_btn: 'Entrar', login_error: 'PIN incorrecto', login_hint: 'PIN por defecto: 1234',
+        login_sub: 'Panel de administración', login_btn: 'Entrar', login_user_ph: 'Usuario', login_pass_ph: 'Contraseña', login_error: 'Credenciales incorrectas o acceso denegado', login_hint: 'Tu acceso se gestiona en el panel central. Si la tienda no está activa, el acceso está bloqueado.',
         ws_plan: 'WhatShop', ws_new: '+ Nueva tienda',
         nav_apariencia: 'Apariencia', nav_ap_colores: 'Colores', nav_ap_tipografia: 'Tipografía', nav_ap_marca: 'Marca', nav_ap_disenno: 'Diseño', nav_qs: 'Config. rápidas', wz_open: 'Configuración inicial', qs_title: 'Configuraciones rápidas', qs_sub: 'Paletas de color en un clic. Se aplican al tab Colores.', qs_save: 'Guardar actual', qs_saved: 'Paleta guardada', qs_applied: 'Configuración aplicada', qs_presets: 'Rápidas', qs_saved_list: 'Guardadas', qs_delete: 'Eliminar', qs_name_required: 'Escribe un nombre', qs_empty: 'No hay paletas guardadas', prev_title: 'Vista previa en vivo', prev_sub: 'Cambia y mira el resultado en tiempo real.', wz_title: 'Configuración inicial', wz_sub: 'Configura tu tienda en unos pasos.', wz_back: 'Atrás', wz_next: 'Siguiente', wz_finish: 'Finalizar', sv_title: 'Vista de la tienda', sv_live: 'En vivo', tut_skip: 'Saltar tutorial', tut_restart: 'Tutorial', tut_done: '¡Tutorial completado!', help_ok: 'Entendido', help_btn: 'Ayuda', hl_subir_t: 'Cómo subir un producto', hl_subir_x: '<p>Completa nombre, precio y categoría. Opcional: subcategoría, imágenes, variantes (tallas o colores) y stock.</p><ul><li>Cada variante pide su propio stock.</li><li>Puedes fijar precio y stock de varias variantes a la vez con el bloque de edición en grupo.</li><li>Termina con Guardar producto.</li></ul>', hl_productos_t: 'Gestionar productos', hl_productos_x: '<p>Aquí ves todo lo que has subido, con buscador y filtro por categoría.</p><ul><li>Alterna entre vista de tarjetas y lista en la barra superior.</li><li>Edita con el lápiz o borra con el tache rojo.</li><li>El interruptor oculta o muestra el producto en la tienda sin borrarlo.</li></ul>', hl_categorias_t: 'Categorías y subcategorías', hl_categorias_x: '<p>Organiza tu catálogo en niveles y personaliza cómo se ve en la tienda.</p><ul><li>Nueva categoría: sección principal (ej. Anillos).</li><li>Nueva subcategoría: detalle dentro de una categoría (ej. Casamiento).</li><li>Barra de navegación: elige ícono, color e imagen de presentación.</li></ul>', hl_plantillas_t: 'Plantillas de tallas', hl_plantillas_x: '<p>Para productos sin variantes, define aquí las tallas disponibles (S, M, L, ...).</p><ul><li>Escribe un nombre de plantilla y una talla por línea.</li><li>Nueva crea la plantilla y Vista las lista.</li><li>La plantilla por defecto se aplica a los productos sin variantes.</li></ul>', hl_contenido_t: 'Contenido y mensaje de WhatsApp', hl_contenido_x: '<p>Configura los textos que ven tus clientes.</p><ul><li>Mensaje de WhatsApp: plantilla del mensaje al confirmar la compra.</li><li>Los botones insertan variables automáticamente (cliente, productos, total...).</li><li>Logo de la marca: se muestra en la tienda.</li></ul>', wz_s1_t: 'Tu tienda', wz_s1_sub: 'Nombre, WhatsApp y moneda.', wz_s2_t: 'Colores', wz_s2_sub: 'Elige un estilo para tu tienda.', wz_s3_t: 'Logo y marca', wz_s3_sub: 'Sube tu logo y ajusta el nombre.', wz_s4_t: 'Métodos de pago', wz_s4_sub: 'Cómo recibe los pagos de tus clientes.', wz_pal1: 'Clásico', wz_pal2: 'Oscuro elegante', wz_pal3: 'Minimal blanco', wz_done: 'Tienda configurada',
         tut_s0_t: 'Bienvenido a tu panel', tut_s0_x: 'Vamos a crear tu catálogo en 4 pasos: tu primera categoría, una subcategoría y tu primer producto.', tut_s1_t: '1. Crea tu categoría', tut_s1_x: 'Ve a la pestaña Nueva categoría, escribe el nombre (ej. Anillos) y pulsa Guardar categoría.', tut_s2_t: '2. Agrega subcategorías', tut_s2_x: 'En Nueva subcategoría elige tu categoría y añade un nombre (ej. Casamiento). Repítelo cuantas veces quieras.', tut_s3_t: '3. Sube tu primer producto', tut_s3_x: 'En Subir producto escribe nombre, precio y elige tu categoría y subcategoría. Opcional: fotos, variantes y stock. Pulsa Guardar producto.', tut_s4_t: '¡Listo!', tut_s4_x: 'Ya sabes armar tu catálogo. Ve a Apariencia > Colores para ver la vista previa de tu tienda en vivo. Puedes repetir este tutorial cuando quieras con el botón de ayuda (?) arriba.', nav_app_heading: 'Apariencia', nav_tienda: 'General', nav_store_heading: 'Tienda', nav_contenido: 'Contenido', nav_cat_heading: 'Catálogo', nav_subir: 'Subir producto', nav_productos: 'Productos', nav_categorias: 'Categorías', nav_plantillas: 'Plantillas de tallas',
@@ -865,13 +860,13 @@
         t_pedidos: 'Pedidos', t_pedidos_sub: 'Historial de pedidos enviados por WhatsApp.', ped_refresh: 'Refrescar', ped_none: 'No hay pedidos.', ped_wa: 'WhatsApp', ped_pagado: 'Pagado', ped_entregado: 'Entregado', ped_cancelar: 'Cancelar',
         an_nodata: 'Sin datos',
         t_backup: 'Backup', t_backup_sub: 'Exporta e importa toda la configuración y catálogo.', bk_export: 'Exportar backup JSON', bk_import: 'Importar backup', bk_imported: 'Backup importado correctamente', bk_invalid: 'Archivo inválido',
-        t_config: 'Configuración', t_config_sub: 'PIN de acceso, pantalla de bienvenida y ajustes del panel.', cf_pin: 'PIN de administrador', cf_pin_sub: 'PIN numérico de 6 dígitos. Cambiará el acceso al panel.', cf_pin_new: 'Nuevo PIN (6 dígitos)', cf_pin_confirm: 'Confirmar PIN', cf_pin_btn: 'Cambiar PIN', cf_pin_done: 'PIN actualizado', cf_pin_mismatch: 'Los PIN no coinciden', cf_pin_len: 'El PIN debe tener 6 dígitos',
+        t_config: 'Configuración', t_config_sub: 'Acceso al panel, pantalla de bienvenida y ajustes.', cf_login: 'Acceso del administrador', cf_login_sub: 'Tu usuario y contraseña se gestionan en el panel central (los servicios de tu proveedor). Si la tienda está bloqueada o no registrada, el acceso se deniega automáticamente.',
         cf_splash: 'Pantalla de bienvenida', cf_splash_sub: 'Se muestra tras el splash de 3s, antes de entrar a la tienda.', cf_splash_bg: 'Color de fondo', cf_splash_text: 'Texto de bienvenida', cf_splash_text_color: 'Color del texto', cf_splash_logo: 'Logo de la bienvenida', cf_splash_done: 'Bienvenida guardada',
         st_saved: 'Guardado correctamente', st_error: 'Error al guardar', st_en_proceso: 'En proceso', st_nuevo: 'Nuevo', st_pagado: 'Pagado', st_entregado: 'Entregado', st_cancelado: 'Cancelado', upload_btn: 'Subir imagen', no_file: 'Sin archivo', palettes_title: 'Paletas de colores', palettes_sub: 'Elige una combinación completa y se aplicará a la tienda.', pal_confirm: '¿Aplicar esta paleta de colores?', pal_applied: 'Paleta aplicada', pal_1: 'Clásico', pal_2: 'Oscuro elegante', pal_3: 'Minimal blanco', pal_4: 'Azul sereno', pal_5: 'Rosa suave', pal_6: 'Verde naturaleza', pal_7: 'Otoño terracota', pal_8: 'Violeta moderno', pal_9: 'Oro y negro', pal_10: 'Café cálido', clear_cat: 'Catálogo', clear_cat_sub: 'Borra todos los productos y categorías de la tienda (no los pedidos).', clear_cat_btn: 'Borrar catálogo (demo)', clear_cat_confirm: '¿Borrar todos los productos y categorías? Esta acción no se puede deshacer.', clear_cat_done: 'Catálogo borrado', del_confirm: '¿Eliminar este elemento?', del_confirm_cat: '¿Eliminar esta categoría?', del_confirm_prod: '¿Eliminar este producto?', del_confirm_tpl: '¿Eliminar esta plantilla?',
         edit: 'Editar', new_store_ph: 'Nombre de la nueva tienda', no_stores: 'Sin tiendas', empty_cat: 'No hay categorías.', empty_prod: 'No hay productos.', empty_tpl: 'No hay plantillas.', empty_ord: 'No hay pedidos aún.', es_cta_cat: 'Crear primera categoría', es_cta_prod: 'Subir primer producto', es_cta_ord: 'Refrescar pedidos'
       },
       en: {
-        login_sub: 'Admin panel', login_btn: 'Enter', login_error: 'Wrong PIN', login_hint: 'Default PIN: 1234',
+        login_sub: 'Admin panel', login_btn: 'Enter', login_user_ph: 'User', login_pass_ph: 'Password', login_error: 'Wrong credentials or access denied', login_hint: 'Your access is managed in the central panel. If the store is not active, access is blocked.',
         ws_plan: 'WhatShop', ws_new: '+ New store',
         nav_apariencia: 'Appearance', nav_ap_colores: 'Colors', nav_ap_tipografia: 'Typography', nav_ap_marca: 'Branding', nav_ap_disenno: 'Design', nav_qs: 'Quick settings', wz_open: 'Initial setup', qs_title: 'Quick settings', qs_sub: 'Color palettes in one click. Applies to the Colors tab.', qs_save: 'Save current', qs_saved: 'Palette saved', qs_applied: 'Configuration applied', qs_presets: 'Quick', qs_saved_list: 'Saved', qs_delete: 'Delete', qs_name_required: 'Type a name', qs_empty: 'No saved palettes', prev_title: 'Live preview', prev_sub: 'Change and see the result in real time.', wz_title: 'Initial setup', wz_sub: 'Set up your store in a few steps.', wz_back: 'Back', wz_next: 'Next', wz_finish: 'Finish', sv_title: 'Store preview', sv_live: 'Live', tut_skip: 'Skip tutorial', tut_restart: 'Tutorial', tut_done: 'Tutorial completed!', help_ok: 'Got it', help_btn: 'Help', hl_subir_t: 'How to upload a product', hl_subir_x: '<p>Fill in name, price and category. Optional: subcategory, images, variants (sizes or colors) and stock.</p><ul><li>Each variant needs its own stock.</li><li>Set price and stock for many variants at once with the bulk edit bar.</li><li>Finish with Save product.</li></ul>', hl_productos_t: 'Manage products', hl_productos_x: '<p>Here you see everything you uploaded, with search and category filter.</p><ul><li>Switch between card and list views in the top bar.</li><li>Edit with the pencil or delete with the red cross.</li><li>The switch hides or shows the product in the store without deleting it.</li></ul>', hl_categorias_t: 'Categories and subcategories', hl_categorias_x: '<p>Organize your catalog and customize how it looks in the store.</p><ul><li>New category: main section (e.g. Rings).</li><li>New subcategory: detail inside a category (e.g. Wedding).</li><li>Nav bar: pick the icon, color and cover image.</li></ul>', hl_plantillas_t: 'Size templates', hl_plantillas_x: '<p>For products without variants, define the available sizes here (S, M, L, ...).</p><ul><li>Type a template name and one size per line.</li><li>New creates the template and View lists them.</li><li>The default template applies to products without variants.</li></ul>', hl_contenido_t: 'Content and WhatsApp message', hl_contenido_x: '<p>Set the texts your customers see.</p><ul><li>WhatsApp message: template of the message when confirming the purchase.</li><li>The buttons insert variables automatically (customer, items, total...).</li><li>Store logo: shown across the store.</li></ul>', wz_s1_t: 'Your store', wz_s1_sub: 'Name, WhatsApp and currency.', wz_s2_t: 'Colors', wz_s2_sub: 'Pick a style for your store.', wz_s3_t: 'Logo & brand', wz_s3_sub: 'Upload your logo and adjust the name.', wz_s4_t: 'Payment methods', wz_s4_sub: 'How your customers pay.', wz_pal1: 'Classic', wz_pal2: 'Elegant dark', wz_pal3: 'Minimal white', wz_done: 'Store configured',
         tut_s0_t: 'Welcome to your panel', tut_s0_x: 'Let\'s build your catalog in 4 steps: your first category, a subcategory and your first product.', tut_s1_t: '1. Create your category', tut_s1_x: 'Open the New category tab, type the name (e.g. Rings) and press Save category.', tut_s2_t: '2. Add subcategories', tut_s2_x: 'In New subcategory pick your category and add a name (e.g. Wedding). Repeat as many times as you want.', tut_s3_t: '3. Upload your first product', tut_s3_x: 'In Upload product type the name, price and pick your category and subcategory. Optional: photos, variants and stock. Press Save product.', tut_s4_t: 'Done!', tut_s4_x: 'You now know how to build your catalog. Go to Appearance > Colors to watch your store preview live. Replay this tutorial anytime with the help (?) button above.', nav_app_heading: 'Appearance', nav_tienda: 'General', nav_store_heading: 'Store', nav_contenido: 'Content', nav_cat_heading: 'Catalog', nav_subir: 'Upload product', nav_productos: 'Products', nav_categorias: 'Categories', nav_plantillas: 'Size templates',
@@ -896,7 +891,7 @@
         t_pedidos: 'Orders', t_pedidos_sub: 'Order history sent via WhatsApp.', ped_refresh: 'Refresh', ped_none: 'No orders.', ped_wa: 'WhatsApp', ped_pagado: 'Paid', ped_entregado: 'Delivered', ped_cancelar: 'Cancel',
         an_nodata: 'No data',
         t_backup: 'Backup', t_backup_sub: 'Export and import all config and catalog.', bk_export: 'Export backup JSON', bk_import: 'Import backup', bk_imported: 'Backup imported successfully', bk_invalid: 'Invalid file',
-        t_config: 'Settings', t_config_sub: 'Access PIN, welcome screen and panel settings.', cf_pin: 'Admin PIN', cf_pin_sub: '6-digit numeric PIN. It changes panel access.', cf_pin_new: 'New PIN (6 digits)', cf_pin_confirm: 'Confirm PIN', cf_pin_btn: 'Change PIN', cf_pin_done: 'PIN updated', cf_pin_mismatch: 'PINs do not match', cf_pin_len: 'PIN must be 6 digits',
+        t_config: 'Settings', t_config_sub: 'Panel access, welcome screen and settings.', cf_login: 'Admin access', cf_login_sub: 'Your username and password are managed in the central panel (your provider services). If the store is blocked or not registered, access is denied automatically.',
         cf_splash: 'Welcome screen', cf_splash_sub: 'Shown after the 3s splash, before entering the store.', cf_splash_bg: 'Background color', cf_splash_text: 'Welcome text', cf_splash_text_color: 'Text color', cf_splash_logo: 'Welcome logo', cf_splash_done: 'Welcome saved',
         st_saved: 'Saved successfully', st_error: 'Error saving', st_en_proceso: 'In process', st_nuevo: 'New', st_pagado: 'Paid', st_entregado: 'Delivered', st_cancelado: 'Cancelled', upload_btn: 'Upload image', no_file: 'No file', palettes_title: 'Color palettes', palettes_sub: 'Pick a full color combination and it will be applied to the store.', pal_confirm: 'Apply this color palette?', pal_applied: 'Palette applied', pal_1: 'Classic', pal_2: 'Dark elegant', pal_3: 'Minimal white', pal_4: 'Serene blue', pal_5: 'Soft pink', pal_6: 'Nature green', pal_7: 'Terracotta autumn', pal_8: 'Modern violet', pal_9: 'Gold and black', pal_10: 'Warm coffee', clear_cat: 'Catalog', clear_cat_sub: 'Deletes all products and categories from the store (not orders).', clear_cat_btn: 'Clear catalog (demo)', clear_cat_confirm: 'Delete all products and categories? This cannot be undone.', clear_cat_done: 'Catalog cleared', del_confirm: 'Delete this item?', del_confirm_cat: 'Delete this category?', del_confirm_prod: 'Delete this product?', del_confirm_tpl: 'Delete this template?',
         edit: 'Edit', new_store_ph: 'New store name', no_stores: 'No stores', empty_cat: 'No categories.', empty_prod: 'No products.', empty_tpl: 'No templates.', empty_ord: 'No orders yet.', es_cta_cat: 'Create first category', es_cta_prod: 'Upload first product', es_cta_ord: 'Refresh orders'
@@ -958,21 +953,43 @@
 
     // ===== Login =====
     function doLogin() {
-      var pin = document.getElementById('pin').value;
-      if (!pin) return;
-      Promise.all([hashPin(pin), SBHelper.getPinHash()])
-        .then(function (res) {
-          if (res[0] === res[1]) {
-            sessionStorage.setItem('whatshop_admin', '1');
-            showPanel();
-          } else {
-            document.getElementById('login-error').style.display = 'block';
-          }
-        })
-        .catch(function () { document.getElementById('login-error').style.display = 'block'; });
+      var user = (document.getElementById('login-user').value || '').trim();
+      var pass = document.getElementById('login-pass').value;
+      var errEl = document.getElementById('login-error');
+      if (!user || !pass) { errEl.style.display = 'block'; return; }
+      var wst = window.OX1_WSTORE;
+      if (!wst || !wst.centralUrl || !wst.centralKey || wst.wsRef == null) { errEl.style.display = 'block'; return; }
+      errEl.style.display = 'none';
+      hashPin(pass).then(function (hash) {
+        return fetch(wst.centralUrl + '/rest/v1/rpc/store_admin_login', {
+          method: 'POST',
+          headers: {
+            'apikey': wst.centralKey,
+            'Authorization': 'Bearer ' + wst.centralKey,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            p_ws_ref: wst.wsRef,
+            p_ws_store_id: wst.wsStoreId,
+            p_user: user,
+            p_pass_hash: hash
+          })
+        });
+      }).then(function (r) { return r.json(); }).then(function (j) {
+        if (j && j.ok === true && j.online === true) {
+          sessionStorage.setItem('whatshop_admin', '1');
+          showPanel();
+        } else {
+          errEl.textContent = j && j.reason ? j.reason : t('login_error');
+          errEl.style.display = 'block';
+        }
+      }).catch(function () { errEl.textContent = t('login_error'); errEl.style.display = 'block'; });
     }
     document.getElementById('login-btn').addEventListener('click', doLogin);
-    document.getElementById('pin').addEventListener('keydown', function (e) { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('login-user').addEventListener('keydown', function (e) { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('login-pass').addEventListener('keydown', function (e) { if (e.key === 'Enter') doLogin(); });
+    document.getElementById('login-user').placeholder = t('login_user_ph');
+    document.getElementById('login-pass').placeholder = t('login_pass_ph');
     document.getElementById('login-hint').textContent = t('login_hint');
 
     function showPanel() {
@@ -1134,7 +1151,8 @@
       sessionStorage.removeItem('whatshop_admin');
       document.getElementById('panel-view').classList.add('hidden');
       document.getElementById('login-view').classList.remove('hidden');
-      document.getElementById('pin').value = '';
+      document.getElementById('login-user').value = '';
+      document.getElementById('login-pass').value = '';
     }
     document.getElementById('btn-logout').addEventListener('click', doLogout);
     document.getElementById('btn-ver-tienda').addEventListener('click', function () { window.open('./tienda.html', '_blank'); });
@@ -2434,23 +2452,6 @@ _editingProduct = null;
         }
       };
       reader.readAsText(file);
-    });
-
-    // ===== Configuración: PIN =====
-    document.getElementById('btn-change-pin').addEventListener('click', function () {
-      var a = document.getElementById('cfg-pin-new').value;
-      var b = document.getElementById('cfg-pin-confirm').value;
-      if (a.length !== 6 || b.length !== 6) { document.getElementById('pin-status').textContent = t('cf_pin_len'); return; }
-      if (a !== b) { document.getElementById('pin-status').textContent = t('cf_pin_mismatch'); return; }
-      hashPin(a).then(function (hash) {
-        return SBHelper.setPinHash(hash);
-      }).then(function () {
-        document.getElementById('pin-status').textContent = t('cf_pin_done');
-        document.getElementById('pin-status').className = 'status-line ok';
-        document.getElementById('cfg-pin-new').value = '';
-        document.getElementById('cfg-pin-confirm').value = '';
-        toast(t('cf_pin_done'), 'success');
-      }).catch(function () { document.getElementById('pin-status').textContent = t('st_error'); });
     });
 
     // ===== Configuración: splash =====
