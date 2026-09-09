@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -47,7 +47,7 @@
           <svg class="icon-moon" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
         </button>
 
-        <nav class="top-nav" aria-label="Navegación principal">
+        <nav class="top-nav" aria-label="NavegaciÃ³n principal">
           <button class="nav-item active" data-tab="explore" aria-label="Productos" aria-current="page">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
             <span data-i18n="nav_explore">Productos</span>
@@ -95,16 +95,16 @@
           <button class="filter-toggle" id="filter-toggle" data-i18n="filters">Filtros</button>
         </div>
         <div class="cat-circles-wrap">
-          <button class="cat-scroll-btn cat-scroll-prev hidden" id="cat-scroll-prev" aria-label="Categorías anteriores">&#8249;</button>
+          <button class="cat-scroll-btn cat-scroll-prev hidden" id="cat-scroll-prev" aria-label="CategorÃ­as anteriores">&#8249;</button>
           <div class="cat-circles" id="cat-circles"></div>
-          <button class="cat-scroll-btn hidden" id="cat-scroll-btn" aria-label="Más categorías">&#8250;</button>
+          <button class="cat-scroll-btn hidden" id="cat-scroll-btn" aria-label="MÃ¡s categorÃ­as">&#8250;</button>
         </div>
         <div class="cat-subs hidden" id="cat-subs"></div>
       </div>
       <div class="explore-layout has-filters">
         <aside class="filter-panel" id="filter-panel">
           <div class="filter-head">
-            <h4 class="filter-group-title" data-i18n="categories_title">Categorías</h4>
+            <h4 class="filter-group-title" data-i18n="categories_title">CategorÃ­as</h4>
             <button class="filter-close" id="filter-close" aria-label="Cerrar filtros">&times;</button>
           </div>
           <div class="filter-group">
@@ -114,7 +114,7 @@
           </div>
           <div class="filter-group collapsed">
             <button type="button" class="filter-group-head" aria-expanded="false">
-              <span data-i18n="subcat_options">Subcategorías</span>
+              <span data-i18n="subcat_options">SubcategorÃ­as</span>
               <svg class="filter-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div class="filter-group-body">
@@ -172,14 +172,14 @@
                 <span><span class="what">What</span><span class="shop">Shop</span></span>
               </div>
               <div class="footer-links">
-                <a href="./terminos.html" data-i18n="f_terminos">Términos y condiciones</a>
-                <a href="./privacidad.html" data-i18n="f_privacidad">Política de privacidad</a>
-                <a href="./politicas.html" data-i18n="f_politicas">Políticas de compra</a>
-                <a href="./cookies.html" data-i18n="f_cookies">Política de cookies</a>
+                <a href="./terminos.html" data-i18n="f_terminos">TÃ©rminos y condiciones</a>
+                <a href="./privacidad.html" data-i18n="f_privacidad">PolÃ­tica de privacidad</a>
+                <a href="./politicas.html" data-i18n="f_politicas">PolÃ­ticas de compra</a>
+                <a href="./cookies.html" data-i18n="f_cookies">PolÃ­tica de cookies</a>
                 <a href="./contacto.html" data-i18n="f_contacto">Contacto</a>
               </div>
               <div class="footer-copy">
-                <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">WhatShop</span> · <span data-i18n="f_by">Plataforma de tienda de</span> OX1</span>
+                <span>&copy; <span id="footer-year"></span> <span id="footer-brand-name">WhatShop</span> Â· <span data-i18n="f_by">Plataforma de tienda de</span> OX1</span>
               </div>
             </div>
           </footer>
@@ -213,7 +213,7 @@
     </div>
   </aside>
 
-  <nav class="bottom-nav" aria-label="Navegación">
+  <nav class="bottom-nav" aria-label="NavegaciÃ³n">
     <button class="nav-item active" data-tab="explore" aria-label="Productos" aria-current="page">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       <span data-i18n="nav_explore">Productos</span>
@@ -226,8 +226,8 @@
 
   <div class="toast" id="toast" role="status"></div>
 
-<script src="./config.js?v=41"></script>
-<script src="./js/supabase.js?v=46"></script>
+<script src="./config.js?v=42"></script>
+<script src="./js/supabase.js?v=47"></script>
 <script src="./js/cart.js?v=46"></script>
 <script src="./js/ox1-license.js?v=1"></script>
 <script src="./js/ox1-gate.js?v=6"></script>
@@ -235,23 +235,23 @@
     // ===== i18n =====
     var I18N = {
       es: {
-        nav_home: 'Inicio', nav_explore: 'Productos', nav_cart: 'Carrito', filters: 'Filtros', clear: 'Limpiar', price: 'Precio', price_min: 'Mín', price_max: 'Máx', price_search: 'Buscar', color: 'Color', color_options: 'Opciones de color', color_more: 'Ver más colores', color_less: 'Ver menos', cat_all: 'Todo', subcat_options: 'Subcategorías', cat_more: 'Ver más categorías', cat_less: 'Ver menos categorías', size_more: 'Ver más tallas', size_less: 'Ver menos tallas', size: 'Tallas', avail: 'Disponibilidad', avail_yes: 'Disponible', avail_low: 'Por agotarse', crumbs_products: 'Productos', reviews_title: 'Reseñas de clientes', reviews_empty: 'Sin reseñas todavía', rev_verified: 'Cliente verificado', no_variants: 'No hay productos con variantes de tallas o colores',
+        nav_home: 'Inicio', nav_explore: 'Productos', nav_cart: 'Carrito', filters: 'Filtros', clear: 'Limpiar', price: 'Precio', price_min: 'MÃ­n', price_max: 'MÃ¡x', price_search: 'Buscar', color: 'Color', color_options: 'Opciones de color', color_more: 'Ver mÃ¡s colores', color_less: 'Ver menos', cat_all: 'Todo', subcat_options: 'SubcategorÃ­as', cat_more: 'Ver mÃ¡s categorÃ­as', cat_less: 'Ver menos categorÃ­as', size_more: 'Ver mÃ¡s tallas', size_less: 'Ver menos tallas', size: 'Tallas', avail: 'Disponibilidad', avail_yes: 'Disponible', avail_low: 'Por agotarse', crumbs_products: 'Productos', reviews_title: 'ReseÃ±as de clientes', reviews_empty: 'Sin reseÃ±as todavÃ­a', rev_verified: 'Cliente verificado', no_variants: 'No hay productos con variantes de tallas o colores',
         buscar: 'Buscar productos...',
-        promo_title: 'Rebajas de Año Nuevo', promo_discount: '25% descuento', promo_img: 'Imagen de promoción',
-        categories_title: 'Categorías', popular_title: 'Productos Populares', view_all: 'Ver todas', view_all_cats: 'Ver todas las categorías', go_store: 'Ir a la tienda',
+        promo_title: 'Rebajas de AÃ±o Nuevo', promo_discount: '25% descuento', promo_img: 'Imagen de promociÃ³n',
+        categories_title: 'CategorÃ­as', popular_title: 'Productos Populares', view_all: 'Ver todas', view_all_cats: 'Ver todas las categorÃ­as', go_store: 'Ir a la tienda',
         cart_title: 'Carrito', cart_total: 'Total', cart_checkout: 'Proceder al checkout',
-        checkout_title: 'Datos de envío y pago', co_name: 'Nombre completo', co_name_ph: 'Tu nombre',
-        co_phone: 'Teléfono / WhatsApp', co_payment: 'Método de pago', co_payment_sel: 'Selecciona...',
-        pay_cash: 'Efectivo', pay_transfer: 'Transferencia', pay_mobile: 'Pago móvil', pay_card: 'Tarjeta',
-        co_note: 'Nota / referencia (opcional)', co_note_ph: 'Dirección, referencia, talla...',
+        checkout_title: 'Datos de envÃ­o y pago', co_name: 'Nombre completo', co_name_ph: 'Tu nombre',
+        co_phone: 'TelÃ©fono / WhatsApp', co_payment: 'MÃ©todo de pago', co_payment_sel: 'Selecciona...',
+        pay_cash: 'Efectivo', pay_transfer: 'Transferencia', pay_mobile: 'Pago mÃ³vil', pay_card: 'Tarjeta',
+        co_note: 'Nota / referencia (opcional)', co_note_ph: 'DirecciÃ³n, referencia, talla...',
         send_whatsapp: 'Enviar pedido por WhatsApp',
-        cart_empty: 'Tu carrito está vacío', no_products: 'No hay productos', write_name: 'Escribe tu nombre',
+        cart_empty: 'Tu carrito estÃ¡ vacÃ­o', no_products: 'No hay productos', write_name: 'Escribe tu nombre',
         add_to_cart: 'Agregar al carrito', added: 'Agregado al carrito', view: 'Ver', total_label: 'TOTAL',
-        out: 'Agotado', offer: 'Oferta', variants: 'variantes', size_others: 'Otros', hero_title: 'NUEVOS PRODUCTOS', hero_sub: 'Colección 2026', hero_cta: 'Ir a la tienda', hero_prev: 'Anterior', hero_next: 'Siguiente', popular_l1: 'Productos', popular_l2: 'Populares', promo_cta_title: 'Descubre toda la colección', promo_cta_sub: 'Cientos de productos para ti', promo_cta_btn: 'Ver catálogo completo', enter_store: 'Entrar a la tienda', wa_hi: 'Hola, tengo una consulta sobre sus productos.',
-        f_terminos: 'Términos y condiciones', f_privacidad: 'Política de privacidad',
-        f_politicas: 'Políticas de compra', f_cookies: 'Política de cookies',
+        out: 'Agotado', offer: 'Oferta', variants: 'variantes', size_others: 'Otros', hero_title: 'NUEVOS PRODUCTOS', hero_sub: 'ColecciÃ³n 2026', hero_cta: 'Ir a la tienda', hero_prev: 'Anterior', hero_next: 'Siguiente', popular_l1: 'Productos', popular_l2: 'Populares', promo_cta_title: 'Descubre toda la colecciÃ³n', promo_cta_sub: 'Cientos de productos para ti', promo_cta_btn: 'Ver catÃ¡logo completo', enter_store: 'Entrar a la tienda', wa_hi: 'Hola, tengo una consulta sobre sus productos.',
+        f_terminos: 'TÃ©rminos y condiciones', f_privacidad: 'PolÃ­tica de privacidad',
+        f_politicas: 'PolÃ­ticas de compra', f_cookies: 'PolÃ­tica de cookies',
         f_contacto: 'Contacto', f_by: 'Plataforma de tienda de',
-        closed_msg: 'La tienda está cerrada en este momento'
+        closed_msg: 'La tienda estÃ¡ cerrada en este momento'
       },
       en: {
         nav_home: 'Home', nav_explore: 'Products', nav_cart: 'Cart', filters: 'Filters', clear: 'Clear', price: 'Price', price_min: 'Min', price_max: 'Max', price_search: 'Search', color: 'Color', color_options: 'Color options', color_more: 'See more colors', color_less: 'See less', cat_all: 'All', subcat_options: 'Subcategories', cat_more: 'See more categories', cat_less: 'See less categories', size_more: 'See more sizes', size_less: 'See less sizes', size: 'Size', avail: 'Availability', avail_yes: 'In stock', avail_low: 'Almost gone', crumbs_products: 'Products', reviews_title: 'Customer reviews', reviews_empty: 'No reviews yet', rev_verified: 'Verified buyer', no_variants: 'No products with size or color variants',

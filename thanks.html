@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -22,15 +22,15 @@
 <body class="shop-page">
   <div class="thanks-wrap">
     <div class="thanks-icon">&#10003;</div>
-    <h1 data-i18n="thanks_title">¡Gracias por tu pedido!</h1>
+    <h1 data-i18n="thanks_title">Â¡Gracias por tu pedido!</h1>
     <p data-i18n="thanks_sub">Hemos recibido tu pedido y te contactaremos por WhatsApp para confirmarlo.</p>
     <button class="btn-go-store" onclick="window.location.href='./tienda.html?view=explore'" data-i18n="thanks_btn">Volver a la tienda</button>
   </div>
 
-  <script src="./config.js?v=37"></script>
+  <script src="./config.js?v=38"></script>
   <script>
     var I18N = {
-      es: { thanks_title: '¡Gracias por tu pedido!', thanks_sub: 'Hemos recibido tu pedido y te contactaremos por WhatsApp para confirmarlo.', thanks_btn: 'Volver a la tienda' },
+      es: { thanks_title: 'Â¡Gracias por tu pedido!', thanks_sub: 'Hemos recibido tu pedido y te contactaremos por WhatsApp para confirmarlo.', thanks_btn: 'Volver a la tienda' },
       en: { thanks_title: 'Thank you for your order!', thanks_sub: 'We received your order and will contact you by WhatsApp to confirm it.', thanks_btn: 'Back to store' }
     };
     var lang = localStorage.getItem('whatshop_lang') === 'en' ? 'en' : 'es';

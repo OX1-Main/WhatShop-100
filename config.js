@@ -79,3 +79,10 @@ window.OX1_WSTORE = {
   wsStoreId: WS_STORE_ID,
   refreshMs: 5 * 60 * 1000
 };
+
+/* ===== CDN de imagenes (Cloudflare Worker) =====
+   Opcional. Si lo defines, las imagenes publicas se sirven desde tu
+   Worker de Cloudflare (que cachea y reenvia a Supabase una sola vez),
+   ahorrando egress/banda de Supabase. Deja null para servir directo.
+   Ejemplo: 'https://img-mitienda.workers.dev' (sin barra final). */
+window.IMG_CDN = null;

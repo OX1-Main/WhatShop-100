@@ -121,7 +121,9 @@ async function hashPin(pin) {
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
-// Compresion de imagen en el navegador antes de subir (canvas)
+// Compresion de imagen en el navegador antes de subir (canvas).
+// Intenta convertir a WebP (mas ligero); si el navegador no soporta
+// codificar WebP, mantiene el formato original. GIF animado intacto.
 function compressImageFile(file, maxDim, quality) {
   return new Promise(function (resolve) {
     var type = ((file && file.type) || '').toLowerCase();
@@ -131,14 +133,14 @@ function compressImageFile(file, maxDim, quality) {
     img.onload = function () {
       var w = img.width, h = img.height;
       var scale = Math.max(w, h) > maxDim ? maxDim / Math.max(w, h) : 1;
-      if (scale === 1) { URL.revokeObjectURL(url); return resolve(file); }
       var canvas = document.createElement('canvas');
       canvas.width = Math.round(w * scale);
       canvas.height = Math.round(h * scale);
       canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
       URL.revokeObjectURL(url);
-      var outType = type === 'image/webp' ? 'image/webp' : type === 'image/jpeg' ? 'image/jpeg' : 'image/png';
-      var outExt = outType === 'image/webp' ? 'webp' : outType === 'image/jpeg' ? 'jpg' : 'png';
+      var webpOk = typeof canvas.toDataURL === 'function' && canvas.toDataURL('image/webp', quality).indexOf('data:image/webp') === 0;
+      var outType = webpOk ? 'image/webp' : type;
+      var outExt = webpOk ? 'webp' : (type === 'image/jpeg' ? 'jpg' : 'png');
       canvas.toBlob(function (blob) {
         if (!blob) return resolve(file);
         resolve(new File([blob], 'img-' + Date.now() + '.' + outExt, { type: outType }));
@@ -344,16 +346,21 @@ const SBHelper = {
   },
 
   // ---- Storage (imagenes) ----
+  // Si hay CDN (window.IMG_CDN, p.ej. un Worker de Cloudflare), las
+  // imágenes públicas se sirven desde allí en vez de Supabase: el CDN
+  // reenvía a Supabase solo la primera vez y cachea el resto -> 0 egress.
   publicUrl(path) {
-    return `${SUPABASE_URL}/storage/v1/object/public/${STORAGE_BUCKET}/${path}`;
+    const base = window.IMG_CDN || SUPABASE_URL;
+    return `${base}/storage/v1/object/public/${STORAGE_BUCKET}/${path}`;
   },
   async uploadImage(file) {
     const c = await loadSupabase();
     const f = await compressImageFile(file, 1600, 0.82);
-    const name = (f && f.name) || '';
-    const ext = (name.split('.').pop() || 'png').toLowerCase();
+    const ft = (f && f.type || '').toLowerCase();
+    const isGif = ft === 'image/gif';
+    const ext = isGif ? 'gif' : ft === 'image/webp' ? 'webp' : ft === 'image/png' ? 'png' : 'jpg';
     const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-    const { error } = await c.storage.from(STORAGE_BUCKET).upload(path, f, { contentType: f.type || 'image/png' });
+    const { error } = await c.storage.from(STORAGE_BUCKET).upload(path, f, { contentType: ft || 'image/png' });
     if (error) throw error;
     return this.publicUrl(path);
   },
