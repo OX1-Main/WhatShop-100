@@ -12,7 +12,7 @@ window.OX1_CONFIG = {
   endpoint: 'https://wufzqynbhvfbzlmqnvgw.supabase.co',
   appId: 'REEMPLAZAR-CON-EL-APPID-DE-OX1-WHATSHOP',
   key: 'REEMPLAZAR-CON-LA-CLAVE-DEL-CLIENTE',
-  plan: 'free', /* free | basico | profesional | empresarial â€” se muestra en el panel admin bajo el logo */
+  plan: 'free', /* free | basico | profesional | empresarial — se muestra en el panel admin bajo el logo */
   heartbeatHours: 6,
   graceHours: 72,
   debug: false
@@ -21,7 +21,7 @@ window.OX1_CONFIG = {
 /* Analiticas opcionales (Google Analytics 4). Pon tu Measurement ID, p. ej. 'G-XXXXXXXXXX' */
 const GA4_ID = '';
 
-/* Auto-limpiar service workers y cachÃ© viejos (evita servir versiones corruptas) */
+/* Auto-limpiar service workers y caché viejos (evita servir versiones corruptas) */
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then(function (rs) {
     rs.forEach(function (r) { r.unregister(); });
@@ -58,7 +58,7 @@ if (window.caches && caches.keys) {
     bar.innerHTML = '<span style="flex:1;min-width:200px">Usamos cookies y almacenamiento local para mejorar tu experiencia.</span>' +
       '<span style="display:flex;gap:8px;flex-wrap:wrap">' +
       '<button id="cookie-accept" style="padding:8px 18px;border:none;border-radius:999px;background:#16a34a;color:#fff;font-weight:700;cursor:pointer">Aceptar</button>' +
-      '<a href="./cookies.html" style="padding:8px 14px;border-radius:999px;border:1px solid #fff;color:#fff;text-decoration:none;font-weight:600">MÃ¡s info</a>' +
+      '<a href="./cookies.html" style="padding:8px 14px;border-radius:999px;border:1px solid #fff;color:#fff;text-decoration:none;font-weight:600">Más info</a>' +
       '</span>';
     document.body.appendChild(bar);
     document.getElementById('cookie-accept').addEventListener('click', function () {
