@@ -27,6 +27,7 @@
   if (!cfg && !wstore) return;
 
   var locked = false;
+  var ovEl = null;
 
   function esc(s) {
     var d = document.createElement('span');
@@ -34,29 +35,60 @@
     return d.innerHTML;
   }
 
+  // Overlay opaco a pantalla completa: bloquea lo que haya debajo
+  // (el render de la tienda) mientras se verifica el estado. Se
+  // crea en cuanto se evalua el script, ANTES del render, para
+  // que nunca se vea la tienda "descubierta" detras.
+  function ensureOverlay() {
+    if (ovEl && document.getElementById('ox1-lock')) return ovEl;
+    ovEl = document.createElement('div');
+    ovEl.id = 'ox1-lock';
+    ovEl.style.cssText = 'position:fixed;inset:0;z-index:9999999;background:#0e0e13;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+    ovEl.style.visibility = 'hidden';
+    document.body.appendChild(ovEl);
+    return ovEl;
+  }
+
+  function showChecking() {
+    var ov = ensureOverlay();
+    ov.style.visibility = 'visible';
+    ov.innerHTML =
+      '<div style="width:34px;height:34px;border-radius:50%;border:3px solid #27272a;border-top-color:#16a34a;animation:ox1spin .8s linear infinite"></div>' +
+      '<p style="margin:0;color:#a1a1aa;max-width:420px;font-size:14px">Comprobando estado de la tienda...</p>';
+    if (!document.getElementById('ox1-spin-css')) {
+      var st = document.createElement('style');
+      st.id = 'ox1-spin-css';
+      st.textContent = '@keyframes ox1spin { to { transform: rotate(360deg); } }';
+      document.head.appendChild(st);
+    }
+  }
+
+  function hideOverlay() {
+    if (ovEl) ovEl.style.visibility = 'hidden';
+    if (document.body) document.body.style.visibility = '';
+  }
+
   function showLock(reason) {
-    if (locked) return;
     locked = true;
-    var ov = document.getElementById('ox1-lock');
-    if (!ov) {
-      ov = document.createElement('div');
-      ov.id = 'ox1-lock';
-      ov.style.cssText = 'position:fixed;inset:0;z-index:9999999;background:#0e0e13;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+    var ov = ensureOverlay();
+    ov.style.visibility = 'visible';
+    if (!document.getElementById('ox1-lock-btn')) {
       ov.innerHTML =
         '<div style="font-size:46px;line-height:1">\uD83D\uDD12</div>' +
         '<h1 style="margin:4px 0 0;font-size:24px;letter-spacing:.5px">P\u00e1gina suspendida</h1>' +
         '<p style="margin:0;color:#a1a1aa;max-width:420px;font-size:14px">' + esc(reason) + '</p>' +
         '<p style="margin:0;color:#71717a;font-size:12px">Contacta con tu proveedor para reactivar la tienda.</p>' +
-        '<button type="button" id="ox1-lock-retry" style="margin-top:8px;padding:10px 26px;border:none;border-radius:999px;background:#16a34a;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Reintentar</button>';
-      document.body.appendChild(ov);
-      function retry() {
-        if (cfg && OX1License && OX1License.recheck) {
-          OX1License.recheck().catch(function () {});
-          return;
-        }
-        if (wstore) { checkStore().catch(function () {}); }
+        '<button type="button" id="ox1-lock-btn" style="margin-top:8px;padding:10px 26px;border:none;border-radius:999px;background:#16a34a;color:#fff;font-weight:700;font-size:14px;cursor:pointer">Reintentar</button>';
+      var btn = document.getElementById('ox1-lock-btn');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          if (cfg && OX1License && OX1License.recheck) {
+            OX1License.recheck().catch(function () {});
+            return;
+          }
+          if (wstore) { showChecking(); checkStore().catch(function () {}); }
+        });
       }
-      document.getElementById('ox1-lock-retry').addEventListener('click', retry);
     }
   }
 
@@ -75,6 +107,7 @@
       }).then(function (r) { return r.json(); }).then(function (j) {
         if (j && j.online === true) {
           locked = false;
+          hideOverlay();
           resolve(true);
         } else {
           var reason = (j && j.reason) || 'La tienda no está registrada o fue suspendida.';
@@ -83,6 +116,7 @@
         }
       }).catch(function () {
         if (wstore.failOpen !== true) showLock('No se pudo verificar el estado de la tienda.');
+        else hideOverlay();
         resolve(false);
       });
     });
@@ -121,11 +155,26 @@
       }
     }
     if (wstore) {
-      checkStore().then(scheduleCheck);
+      // Tapar la tienda ya en el primer paint: nada se ve detras
+      // mientras la central decide si esta online o suspendida.
+      checkStore().then(function (online) {
+        if (!online) return;
+        scheduleCheck();
+      });
     }
   }
 
-  if (document.readyState === 'loading') {
+  // En modo tienda, tapar la pagina de inmediato (antes de que
+  // renderice) y NO mostrar contenido hasta que la central confirme.
+  if (wstore && wstore.centralUrl && wstore.wsRef && wstore.wsStoreId > 0) {
+    if (document.body) document.body.style.visibility = 'hidden';
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { showChecking(); init(); });
+    } else {
+      showChecking();
+      init();
+    }
+  } else if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
