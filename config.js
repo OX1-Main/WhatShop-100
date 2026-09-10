@@ -86,3 +86,44 @@ window.OX1_WSTORE = {
    ahorrando egress/banda de Supabase. Deja null para servir directo.
 Ejemplo: 'https://img-mitienda.workers.dev' (sin barra final). */
 window.IMG_CDN = 'https://shiny-scene-c37d.contactservice-ox1.workers.dev';
+
+/* ===== OX1 keep-alive (mantener la BD activa) =====
+   Supabase (plan free) pausa el proyecto si no recibe ninguna
+   peticion durante 7 dias. Esta pagina hace un fetch ligero a la
+   BD de la tienda y a la central con la frecuencia indicada,
+   mientras este abierta. Se complementa con el cron de GitHub
+   Actions del dashboard (que peticiona aunque nadie tenga abierta
+   la pagina). */
+(function () {
+  var KEEPALIVE_MS = 20 * 60 * 1000; /* cada 20 min */
+  function keepalivePing() {
+    try {
+      /* ping a la BD de la tienda: select ligero sobre settings (ya permitido para anon) */
+      fetch(SUPABASE_URL + '/rest/v1/settings?select=store_id&limit=1', {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+        }
+      }).catch(function () {});
+    } catch (e) {}
+    var wst = window.OX1_WSTORE;
+    if (!wst || !wst.centralUrl || !wst.centralKey || wst.wsRef == null) return;
+    try {
+      /* ping a la central: store_status ya es una RPC barata registrada */
+      fetch(wst.centralUrl + '/rest/v1/rpc/store_status', {
+        method: 'POST',
+        headers: {
+          'apikey': wst.centralKey,
+          'Authorization': 'Bearer ' + wst.centralKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ p_ws_ref: wst.wsRef, p_ws_store_id: wst.wsStoreId })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  try {
+    if (window.navigator && navigator.connection && navigator.connection.saveData) return;
+  } catch (e) {}
+  keepalivePing();
+  setInterval(keepalivePing, KEEPALIVE_MS);
+})();
